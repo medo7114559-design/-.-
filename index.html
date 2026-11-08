@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مشمش 🐈</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐈</text></svg>">
+<style>
+:root{--bg:#fff1e2;--card:#fffaf4;--ink:#3b2a1e;--mut:#7d6552;--acc:#b85a1a;--on:#fff;--ok:#2f7d3a;--okb:#e6f2dc;--no:#b3261e;--nob:#fde4df;--bd:#f0cfae}
+@media(prefers-color-scheme:dark){:root{--bg:#1f1510;--card:#2a1d15;--ink:#f7e6d6;--mut:#c4a68c;--acc:#f4a261;--on:#1f1510;--ok:#9ad48a;--okb:#233318;--no:#ff9a8f;--nob:#3d1d18;--bd:#4a3426}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px 14px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mut);margin-bottom:8px}
+.sec{font-weight:600;color:var(--acc)}
+.bar{height:6px;background:var(--bd);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--acc)}
+.card{background-color:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.cat{background-repeat:no-repeat;background-position:right 6px bottom 6px;background-size:210px auto}
+.q{font-size:18px;font-weight:600;margin:0 0 14px;white-space:pre-line}
+.opt{display:flex;gap:10px;width:100%;text-align:start;background:color-mix(in srgb,var(--card) 72%,transparent);color:var(--ink);border:1.5px solid var(--bd);border-radius:8px;padding:12px;margin:0 0 8px;font:inherit;cursor:pointer}
+.opt b{flex:none;width:24px;color:var(--acc)}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--okb);border-color:var(--ok)}
+.opt.no{background:var(--nob);border-color:var(--no)}
+.ex{margin-top:12px;padding:12px;border-radius:8px;white-space:pre-line;border-inline-start:4px solid var(--acc);background:var(--bg)}
+.ex strong{display:block;margin-bottom:4px}
+.ex.ok{border-color:var(--ok)}.ex.no{border-color:var(--no)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.btn{font:inherit;font-weight:600;padding:10px 18px;border-radius:8px;border:1.5px solid var(--acc);background:var(--acc);color:var(--on);cursor:pointer}
+.btn.g{background:none;color:var(--acc)}
+.btn:disabled{opacity:.4;cursor:default}
+.score{font-size:44px;font-weight:700;color:var(--acc);margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 16px}
+.chip{font:inherit;padding:4px 10px;border-radius:14px;border:1.5px solid var(--no);background:var(--nob);color:var(--ink);cursor:pointer}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--acc);margin-bottom:12px}
+.brand span{font-size:26px;line-height:1}
+.hero{text-align:center;padding:48px 20px;margin-top:40px}
+.hero .note{font-size:14px;margin:-12px 0 24px}
+.hero h1{font-size:46px;margin:0 0 30px}
+.hero p{color:var(--mut);margin:0 0 28px}
+.hero .btn{font-size:18px;padding:12px 44px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+// [section, question, options (CORRECT FIRST - shuffled in code), explanation]
+const D=[
+["Atom & bonds","Bohr: the angular momentum of an electron in a stationary orbit equals…",["nh/2π","nh","h/(2πn)","n²h/2π"],"Bohr postulate 3: mvr = nh/2π (n = 1, 2, 3…). الباقي مش موجود في أي صيغة، و nh ناقصة 2π."],
+["Atom & bonds","Pauli exclusion principle: no two electrons in an atom can have…",["the same set of n, L, mₗ and mₛ","the same n","the same spin only","the same energy"],"مفيش إلكترونين ليهم الأربع أرقام كلهم زي بعض. ممكن يشتركوا في n أو في الـ spin أو في الطاقة، بس مش الأربعة مع بعض."],
+["Atom & bonds","Maximum number of electrons in the M-shell (n = 3) is…",["18","8","9","32"],"الحد الأقصى = 2n² = 2×9 = 18. الـ 8 هو L-shell (n=2) والـ 32 هو N-shell (n=4)."],
+["Atom & bonds","An excited electron returns to its original stationary state…",["in one or more jumps","always in one jump","always in two jumps","never"],"ممكن يرجع مباشرة أو على مراحل عبر مستويات وسطية، فمفيش عدد ثابت من القفزات."],
+["Atom & bonds","Metals are ductile (drawn into wires) because the metallic bond is…",["non-directional","directional","ionic","very weak"],"الإلكترونات مشتركة بين كل الأيونات فالرابطة مالهاش اتجاه، والطبقات بتتزحلق من غير ما تتكسر. الـ covalent هو اللي directional وصلب."],
+["Atom & bonds","For the extra electron of a donor in n-type Ge/Si (Bohr model in a medium of relative permittivity εr):",["r ∝ εr , W ∝ 1/εr²","r ∝ εr² , W ∝ 1/εr","r ∝ 1/εr , W ∝ εr²","r ∝ εr , W ∝ εr"],"r = ε₀εr h²/(π m e²) فبيتناسب مع εr، والطاقة W = −m e⁴/(8 ε₀² εr² h²) فبتتناسب مع 1/εr². εr كبير في Si و Ge فالطاقة صغيرة والإلكترون بيتحرر بسهولة."],
+
+["Atom & bonds","Covalent bond is formed by…",["sharing a pair of electrons between atoms","transfer of electrons from one atom to another","evaporation of electrons from atoms","none of these"],"Covalent = مشاركة زوج إلكترونات (Cl₂ و Si و Ge). النقل الكامل للإلكترون ده الـ ionic (Na⁺Cl⁻)."],
+["Atom & bonds","For n = 3, the allowed values of the angular momentum quantum number L are…",["0, 1, 2","1, 2, 3","0, 1, 2, 3","0, ±1, ±2"],"L = 0 … (n−1) فـ 0 و1 و2. أما 0, ±1, ±2 فدي قيم mₗ المسموحة لـ L = 2 مش قيم L."],
+["Atom & bonds","The sub-shells for L = 0, 1, 2, 3 are designated…",["s, p, d, f","p, s, f, d","a, b, c, d","K, L, M, N"],"L = 0,1,2,3 ↔ s,p,d,f. أما K,L,M,N فأسماء الـ shells لـ n = 1,2,3,4."],
+["Atom & bonds","The electronic configuration of sodium (Z = 11) is…",["1s² 2s² 2p⁶ 3s¹","1s² 2s² 2p⁶ 3s² 3p⁵","1s² 2s² 2p⁷ 3s¹","1s² 2s² 2p⁵ 3s²"],"المجموع 2+2+6+1 = 11. الـ 3s فيه إلكترون واحد بس (الـ valence) فبيفقده بسهولة ويبقى Na⁺. والـ 2p أقصاه 6 مش 7."],
+["Semiconductors","A material is classified as a semiconductor mainly because its resistivity…",["decreases as temperature rises (dρ/dT < 0)","increases as temperature rises","is zero","does not depend on temperature"],"المعيار هو إن dρ/dT سالب. المعادن موجبة. والفرق بين الـ semiconductor والـ insulator كمي بس (قيمة الـ resistivity)."],
+["Semiconductors","Pure germanium at absolute zero behaves as…",["an insulator","a conductor","a good semiconductor","a superconductor"],"عند 0 K كل إلكترونات الـ valence في روابط والـ conduction band فاضية، فمفيش حاملات حرة وبيتصرف كـ insulator."],
+["Semiconductors","In an intrinsic semiconductor, the mass-action law states…",["nᵢ² = nₑ·nₕ","nᵢ = nₑ + nₕ","nₑ = 2nₕ","nₑ·nₕ = 0"],"في الـ intrinsic nₑ = nₕ = nᵢ، وحاصل ضربهم nₑnₕ = nᵢ². الجمع مش هو القانون."],
+["Semiconductors","The plot of ln σᵢ versus 1/T for an intrinsic semiconductor is a straight line with slope…",["−W_g / 2k","−W_g / k","+W_g / 2k","−2W_g / k"],"σᵢ = const·e^(−Wg/2kT) فـ ln σᵢ = const − (Wg/2k)(1/T). الميل = −Wg/2k، ومنه بنقيس الـ energy gap."],
+["Semiconductors","Ge doped with phosphorus (group V) becomes…",["n-type; electrons are the majority carriers","p-type; holes are the majority carriers","intrinsic","an insulator"],"الـ P عنده 5 إلكترونات والـ Ge محتاج 4 للروابط، فالخامس بيبقى donor حر. يبقى n-type والإلكترونات majority."],
+["Semiconductors","In a p-type semiconductor (e.g., boron in Ge), the number of holes is … the number of electrons.",["greater than","equal to","less than","twice"],"البورون عنده 3 إلكترونات بس فبيعمل hole في الرابطة الرابعة. فالـ holes هي الـ majority (p ≈ N_A) والإلكترونات minority."],
+["Semiconductors","In n-type material at LOW temperature (n ≪ N_d), the electron density is determined by…",["the donor concentration","excitation from the valence band","the hole density","the energy gap only"],"في الحرارة المنخفضة الـ donors هي اللي بتتأين. في الحرارة العالية الإثارة من الـ valence band هي اللي بتتحكم (intrinsic region)."],
+["Semiconductors","The sign of the Hall coefficient R_H is positive for…",["p-type (holes)","n-type (electrons)","intrinsic only","insulators"],"R_H = +1/(p e) للـ p-type و −1/(n e) للـ n-type. فمن إشارتها بنعرف نوع الحامل ومن قيمتها كثافته. وكمان μ = σ·R_H."],
+["Semiconductors","For a given Hall sample, the Hall voltage is proportional to…",["B_z · I_x","B_z / I_x","B_z² only","I_x² only"],"V_H = R_H·B_z·I_x / d. عشان كده بتتستخدم كـ magnetic field meter (لما I ثابت) وكـ current transducer (لما B ثابت) وكـ multiplier."],
+["Semiconductors","The diffusion current is proportional to…",["the concentration gradient of carriers","the applied electric field","the square of the applied field","T² only"],"J = ±e·D·dn/dx. اللي بيتناسب مع المجال E هو الـ drift current مش الـ diffusion."],
+["Semiconductors","The ratio D/μ of a carrier (Einstein relation) is proportional to…",["T","T²","1/T","nothing (independent of T)"],"D/μ = kT/e فبيزيد خطيًا مع الحرارة. (لو السؤال معكوس μ/D بيبقى ∝ 1/T.)"],
+["Semiconductors","The depletion region of an open-circuited p-n junction contains…",["uncovered immobile impurity atoms","free electrons","free holes","neutralized impurity atoms"],"الحاملات الحرة اتسحبت بالانتشار، فاللي فاضل هو الأيونات الثابتة المكشوفة (donor موجب و acceptor سالب) وهي اللي بتعمل الـ potential barrier."],
+
+["Semiconductors","The conductivity of a metallic conductor increases when…",["its temperature and vibrations decrease","its temperature increases","its vibrations increase","both temperature and vibrations increase"],"الحرارة بتزود اهتزاز الـ lattice فالتصادمات بتزيد والـ mean free path والـ τ بيقلوا، فالموصلية بتقل. ده عكس الـ semiconductor اللي موصليته بتزيد بالحرارة."],
+["Semiconductors","The acceptor level of a p-type semiconductor lies…",["just above the valence band; electrons are excited into it leaving free holes","just below the conduction band","in the middle of the gap","inside the conduction band"],"الـ acceptor level هو مستوى الـ hole المربوط، وهو فوق الـ valence band بشوية. بالطاقة Wi الإلكترونات بتطلع له وبتسيب holes حرة. (اللي تحت الـ conduction band هو الـ donor level.)"],
+["Semiconductors","At thermal equilibrium in a non-uniform semiconductor (zero net current), the Einstein relation D = (kT/e)μ comes from…",["drift current balancing diffusion current","diffusion current being zero","drift current being zero","drift and diffusion adding up"],"في الاتزان J = n e μ E − e D dn/dx = 0، يعني الـ drift بيلغي الـ diffusion. ومن توزيع Boltzmann بيطلع D = (kT/e)·μ."],
+["Semiconductors","A hole conducts current because…",["electrons of neighbouring bonds hop into the vacancy, so the vacancy moves like a positive charge","it is a free proton","it is an electron in the conduction band","it is a heavy neutral ion"],"لما إلكترون من رابطة جنبه يملى الفراغ، الفراغ بينتقل للاتجاه العكسي ويتصرف كحامل موجب في اتجاه المجال."],
+["Semiconductors","At equilibrium in the Hall effect, the transverse field E_y satisfies…",["e·E_y = e·v_x·B_z (electric force balances the Lorentz force)","E_y = 0","E_y = B_z only","e·E_y = m·v_x"],"Lorentz بتزق الحاملات لجنب فبتتراكم شحنة بتعمل E_y لحد ما قوتها تساوي قوة Lorentz: E_y = v_x·B_z. بعدها الحاملات بتمشي مستقيم، ومن E_y بنطلع V_H = E_y·W."],
+["Magnetic","The parameter used to assess the magnetic ability of a material is…",["susceptibility χ = μr − 1","flux density B","magnetic dipole moment","magnetic field intensity H"],"χ بيقيس استجابة المادة نفسها للمجال، وهو بدون وحدة. الـ B و H بيتأثروا بالمجال الخارجي مش بالمادة بس."],
+["Magnetic","For a diamagnetic material:",["χ < 0 and μr ≤ 1 (≈ 1 − 10⁻⁵)","χ > 0 and μr > 1","χ = 0 and μr = 0","χ = 1"],"المجال المطبق بيعمل induced moment عكسه، فـ χ سالب (حوالي −10⁻⁵) و μr = 1 + χ أقل من 1 بشوية."],
+["Magnetic","Variation of susceptibility with temperature:",["Para: χ = C/T ; Dia: independent of T","Para: independent of T ; Dia: χ ∝ 1/T","Both ∝ 1/T","Both independent of T"],"Curie law: χ_para = C/T لأن الحرارة بتبعثر ترتيب الـ dipoles. الـ diamagnetism سببه تركيب الإلكترونات فمش بيتأثر بالحرارة."],
+["Magnetic","Magnetization M is…",["magnetic dipole moment per unit volume, M = χH (A/m)","dipole moment per unit area","the ratio B/H","flux per turn"],"M = μm/(dl·dA) = (μr − 1)H = χH، والعلاقة B = μ₀(H + M)."],
+["Magnetic","For an electron in a circular Bohr orbit, the orbital magnetic moment μm and angular momentum Mₐ are related by…",["μm = −(e/2m)·Mₐ (opposite directions)","μm = +(e/2m)·Mₐ","μm = −(e/m)·Mₐ","μm = (e/2m)²·Mₐ"],"μm = −½ e ω R² و Mₐ = m ω R² فالنسبة −e/2m. السالب لأن شحنة الإلكترون سالبة فالاتجاهين عكس بعض. (النسبة e/m بتاعة الـ spin مش الـ orbit.)"],
+["Magnetic","When B is applied, the induced dipole moment of an orbiting electron (Lenz's law)…",["opposes B and is independent of the initial rotation direction","is parallel to B","depends on the initial rotation direction","is zero"],"Δω = eB/2m فـ μ_ind = −(e²R²/4m)·B ∝ B وعكس المجال. وده أصل الـ diamagnetism."],
+["Magnetic","Ferromagnetic materials…",["have parallel dipoles and spontaneous magnetization below the Curie temperature","always have zero net magnetization","have equal antiparallel dipoles","have no permanent dipoles"],"تحت Curie فيها hysteresis و remanent flux Br و coercive force Hc. فوق Curie بتتحول لـ paramagnetic."],
+["Magnetic","Equal antiparallel moments (net M = 0) are characteristic of … whereas unequal antiparallel moments give …",["antiferromagnetic ; ferrimagnetic (net M > 0)","ferromagnetic ; antiferromagnetic","paramagnetic ; ferromagnetic","diamagnetic ; paramagnetic"],"الـ antiferro (MnO, NiO) المجموعتين بيلغوا بعض. الـ ferri (Fe₃O₄) المجموعتين مختلفتين فبيفضل M صافي."],
+["Magnetic","The magnetic dipole moment of a current loop is…",["μm = n·I·A, and the torque is T = μm × B","μm = I/A, and T = μm/B","μm = I·B","T = μm·B⁻¹"],"A المساحة و n الاتجاه العمودي على اللفة. الـ torque الأقصى = μm·B، فـ μm هو أقصى torque لكل وحدة B."],
+["Magnetic","Force on a current element in a uniform field: dF = I·B·dl·sin α. The force is zero when…",["the conductor is parallel to B","the conductor is perpendicular to B","B = 1 T","the current is along x"],"لما α = 0 بيبقى sin α = 0 والقوة صفر. أقصى قوة عند α = 90°."],
+["Magnetic","The origins of permanent magnetic dipoles in matter are…",["orbital motion, electron spin and nucleus (nuclear ≈ 10⁻³ of electronic)","orbital motion only","nuclear spin only","electron spin only"],"النواة كتلتها حوالي 1000 مرة كتلة الإلكترون والـ moment بيتناسب عكسيًا مع الكتلة فتأثيرها مهمل."],
+["Magnetic","Which statement is correct?",["Above the Curie temperature, a ferromagnet follows χ = C/(T − θ)","Paramagnets keep their magnetization after the field is removed","Diamagnetism exists only in metals","χ is measured in A/m"],"Curie-Weiss فوق Curie. الـ para بيفقد مغنطته لما المجال يتشال. الـ diamagnetism موجود في كل المواد. و χ بدون وحدة (الـ M هو اللي بـ A/m)."],
+
+["Magnetic","Around a long straight wire carrying current I, the flux density at distance a is…",["B = μ₀μr·I / (2πa), decreasing as 1/a","B = μ₀μr·I·a / 2π","B = μ₀μr·I / (2πa²)","B = μ₀μr·I / (4πa)"],"من Ampere على دايرة نصف قطرها a: H·2πa = I فـ H = I/2πa و B = μ₀μr·H. بيقل مع 1/a مش 1/a². (الـ 1/4πr² دي معادلة Biot-Savart لعنصر dl)."],
+["Magnetic","In Lenz's law, e.m.f = −dφ/dt. The minus sign means…",["the induced current opposes the change of flux","the e.m.f. is always negative","the flux is always decreasing","no current flows"],"السالب معناه إن التيار المستحث بيقاوم التغيير في الـ flux، وده سبب إن الـ induced dipole moment بيبقى عكس المجال (diamagnetism)."],
+["Magnetic","For a charge −e spread uniformly in a rotating sphere, the ratio μm/Mₐ equals…",["−e/2m, the same as for a circular Bohr orbit","−e/m","−e/5m","+e/2m"],"μm = −(1/5)eR²ω و Mₐ = (2/5)mR²ω فالنسبة = −e/2m. يعني العلاقة صح لأي عنصر حجم في أي توزيع شحنة مش بس المدار الدائري."],
+["Magnetic","Which material–class pair is correct?",["Cu — diamagnetic ; MnO — antiferromagnetic","K — ferromagnetic ; Fe — diamagnetic","Fe₃O₄ — antiferromagnetic ; O — diamagnetic","Si — paramagnetic ; NiO — ferromagnetic"],"Cu و Bi و Si و Ge دايا. K و O بارا. MnO و NiO أنتيفيرو. Fe₃O₄ (magnetite) فيري. و Fe فيرو."],
+["Magnetic","In the cavity argument (B_i = B_o), an equivalent current is needed inside the cavity because…",["H_i = μr·H is larger than H, so an extra field (μr − 1)H must be produced","B_i is zero","μr = 0 inside the cavity","H_i < H"],"B_i = μ₀H_i و B_o = μ₀μr·H ولازم يتساووا فـ H_i = μr·H أكبر من H. الفرق (μr−1)H بييجي من تيار مكافئ، وهو أصل الـ dipole moment والـ M = (μr−1)H."],
+["Problems","A photon of 4861 Å is absorbed by hydrogen and two photons are emitted. One is 6563 Å. The other is…",["18 744 Å","11 424 Å","1 874 Å","2 280 Å"],"حفظ الطاقة: 1/λabs = 1/λ₁ + 1/λ₂\n1/λ₂ = 1/4861 − 1/6563 = 5.335×10⁻⁵ Å⁻¹\nλ₂ ≈ 18 744 Å\nالـ 11 424 هو جمع الأطوال وده غلط، لأن الطاقة هي اللي بتتجمع مش الطول الموجي."],
+["Problems","An electron with energy −3 eV loses energy and radiates light of wavelength 0.01 Å. Its new energy is…",["−1.99×10⁻¹³ J (≈ −1.24 MeV)","−1.9872 eV","+1.9872×10⁻¹³ J","−3 eV"],"E_photon = hc/λ = (6.624×10⁻³⁴ × 3×10⁸)/10⁻¹² = 1.9872×10⁻¹³ J = 1.242×10⁶ eV\nW₁ = W₂ − E_photon = −3 − 1.242×10⁶ ≈ −1.24×10⁶ eV ≈ −1.99×10⁻¹³ J\nالـ 3 eV مهملة جنب طاقة الفوتون، والإشارة سالبة لأن الإلكترون لسه مربوط."],
+["Problems","Intrinsic silicon at 27 °C: ρ = 3000 Ω·m, μₑ = 0.17, μₕ = 0.035 m²/Vs. The intrinsic carrier density is…",["1.02×10¹⁶ m⁻³","1.02×10¹⁹ m⁻³","3.3×10⁻⁴ m⁻³","2.5×10¹⁶ m⁻³"],"σ = 1/ρ = 1/3000 = 3.33×10⁻⁴ S/m\nσ = nᵢ·e·(μₑ + μₕ) → nᵢ = σ / [e(μₑ+μₕ)]\nnᵢ = 3.33×10⁻⁴ / (1.6×10⁻¹⁹ × 0.205) = 1.02×10¹⁶ m⁻³\nلو نسيت e هتطلع أرقام غلط."],
+["Problems","The potential energy of the electron in the ground state of hydrogen (Bohr) is…",["−27.2 eV","−13.6 eV","+13.6 eV","+27.2 eV"],"W = −e²/(8πε₀r) = −13.6 eV (الـ total)\nKE = +e²/(8πε₀r) = +13.6 eV = 2.18×10⁻¹⁸ J\nPE = −e²/(4πε₀r) = 2W = −27.2 eV\nوتأكيد: KE + PE = 13.6 − 27.2 = −13.6 eV."],
+["Problems","A ground-state hydrogen electron absorbs a 16 eV photon. Its kinetic energy after leaving the atom is…",["2.4 eV","16 eV","13.6 eV","29.6 eV"],"16 eV أكبر من 13.6 eV فالإلكترون بيتحرر (ionization) ويبقى بره الذرة بسرعة موجبة.\nKE = hf − 13.6 = 16 − 13.6 = 2.4 eV\nالـ 13.6 eV راحت لفك ارتباط الإلكترون، فمينفعش نقول KE = 16."],
+["Problems","The de Broglie wavelength of that free electron (K = 2.4 eV) is about…",["7.9 Å","775 Å","5170 Å","0.79 Å"],"K = 2.4 × 1.6×10⁻¹⁹ = 3.84×10⁻¹⁹ J\nλ = h/√(2mK) = 6.624×10⁻³⁴ / √(2 × 9.1×10⁻³¹ × 3.84×10⁻¹⁹)\nλ = 6.624×10⁻³⁴ / 8.36×10⁻²⁵ = 7.9×10⁻¹⁰ m = 7.9 Å\nالـ 775 Å هو طول موجة الفوتون نفسه (hc/16 eV) مش الإلكترون."],
+["Problems","n-type Si at 300 K: μₙ = 170 cm²/Vs. The diffusion coefficient of electrons is…",["4.4×10⁻⁴ m²/s","4.4×10⁻⁶ m²/s","0.44 m²/s","3.96×10⁻⁵ m²/s"],"μₙ = 170 cm²/Vs = 0.017 m²/Vs (÷10⁴)\nkT/e = (1.38×10⁻²³ × 300)/1.6×10⁻¹⁹ = 0.02588 V\nDₙ = (kT/e)·μₙ = 0.02588 × 0.017 = 4.4×10⁻⁴ m²/s (= 4.4 cm²/s)"],
+["Problems","Same crystal: μₚ = 35 cm²/Vs. The diffusion coefficient of holes is…",["9.06×10⁻⁵ m²/s","9.06×10⁻⁶ m²/s","9.06 m²/s","8.1×10⁻³ m²/s"],"μₚ = 35 cm²/Vs = 0.0035 m²/Vs\nDₚ = (kT/e)·μₚ = 0.02588 × 0.0035 = 9.06×10⁻⁵ m²/s (= 0.906 cm²/s)\nلاحظ إن Dₚ/Dₙ = μₚ/μₙ = 0.0206 لأن D/μ ثابت."],
+["Problems","The same n-type Si has ρ = 0.9 mΩ·m. Neglecting holes, the electron density is…",["4.1×10²³ m⁻³","4.1×10²⁶ m⁻³","2.5×10²¹ m⁻³","1.0×10¹⁶ m⁻³"],"σ = 1/ρ = 1/(0.9×10⁻³) = 1111 S/m\nσ = n·e·μₙ → n = 1111 / (1.6×10⁻¹⁹ × 0.017) = 4.09×10²³ m⁻³\nولأن n ≫ nᵢ، الـ holes (p = nᵢ²/n) أقل بكتير من الإلكترونات."],
+["Problems","The theoretical Hall coefficient of that n-type Si is…",["−1.53×10⁻⁵ m³/C","+1.53×10⁻⁵ m³/C","−1.53×10⁻³ m³/C","−3.2×10⁻⁶ m³/C"],"n-type: R_H = −1/(n e)\nR_H = −1 / (4.09×10²³ × 1.6×10⁻¹⁹) = −1/65 360 = −1.53×10⁻⁵ m³/C\nالإشارة سالبة لأن الحاملات إلكترونات."],
+["Problems","The actual Hall coefficient (averaging over the velocity distribution) is…",["−1.80×10⁻⁵ m³/C","−1.53×10⁻⁵ m³/C","+1.80×10⁻⁵ m³/C","−1.30×10⁻⁵ m³/C"],"R_H(actual) = −(3π/8)·(1/ne) = 1.178 × (−1.53×10⁻⁵)\nR_H = −1.80×10⁻⁵ m³/C (= −18 cm³/C)\nالمعامل 3π/8 ≈ 1.18 بييجي من متوسط توزيع سرعات الحاملات."],
+["Problems","The radius of the n = 2 Bohr orbit of hydrogen is…",["2.12 Å","0.529 Å","1.06 Å","8.47 Å"],"rₙ = 0.529 × n² Å = 0.529 × 4 = 2.12 Å\n(W₂ = −13.6/4 = −3.4 eV)\nالـ 8.47 Å هو n = 4، والـ 0.529 Å هو n = 1."]
+];
+
+const Q=D;
+const K="ele142_mid_quiz_v4",L=["A","B","C","D"];
+let S={i:0,a:{}},started=false;
+try{const t=JSON.parse(localStorage.getItem(K));if(t&&typeof t.i==="number")S=t}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
+const nAns=()=>Object.keys(S.a).length;
+function view(i){const r=D[i];let p=S.p&&S.p[i];
+ if(!p){p=[0,1,2,3];for(let k=3;k>0;k--){const j=Math.floor(Math.random()*(k+1));[p[k],p[j]]=[p[j],p[k]]}(S.p=S.p||{})[i]=p;save()}
+ return[r[0],r[1],p.map(x=>r[2][x]),p.indexOf(0),r[3]]}
+const score=()=>Q.reduce((s,q,i)=>s+(S.a[i]===view(i)[3]?1:0),0);
+const CAT='url("data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 230"><g opacity=".30"><path d="M150 190C200 190 205 130 178 118" fill="none" stroke="#f0a050" stroke-width="16" stroke-linecap="round"/><ellipse cx="100" cy="168" rx="54" ry="56" fill="#f4a95c"/><ellipse cx="100" cy="178" rx="30" ry="40" fill="#ffe3c2"/><path d="M52 150h14M52 168h14M148 150h-14M148 168h-14" stroke="#d9803a" stroke-width="6" stroke-linecap="round"/><ellipse cx="78" cy="220" rx="18" ry="9" fill="#f4a95c"/><ellipse cx="122" cy="220" rx="18" ry="9" fill="#f4a95c"/><polygon points="58,66 62,18 96,48" fill="#f4a95c"/><polygon points="142,66 138,18 104,48" fill="#f4a95c"/><polygon points="67,56 69,32 87,48" fill="#f7b6a0"/><polygon points="133,56 131,32 113,48" fill="#f7b6a0"/><circle cx="100" cy="88" r="46" fill="#f4a95c"/><path d="M100 46v16M88 49l3 13M112 49l-3 13" stroke="#d9803a" stroke-width="5" stroke-linecap="round"/><ellipse cx="100" cy="106" rx="24" ry="17" fill="#ffe3c2"/><ellipse cx="82" cy="84" rx="6" ry="8" fill="#4a2c17"/><ellipse cx="118" cy="84" rx="6" ry="8" fill="#4a2c17"/><circle cx="84" cy="81" r="2" fill="#fff"/><circle cx="120" cy="81" r="2" fill="#fff"/><polygon points="94,98 106,98 100,106" fill="#e98a7e"/><path d="M100 106v5M100 111q-7 6-14 2M100 111q7 6 14 2" fill="none" stroke="#4a2c17" stroke-width="2.5" stroke-linecap="round"/><path d="M60 100l-24-5M60 108l-24 6M140 100l24-5M140 108l24 6" stroke="#4a2c17" stroke-width="2" stroke-linecap="round"/></g></svg>')+'")';
+function brand(){const b=el("div","brand");b.append(el("span","","🐈"),el("div","","Electrical material"));return b}
+function start(app){
+ const h=el("div","hero card");
+ h.append(el("h1","","مشمش 🐈"));
+ const b=el("button","btn","Start");b.onclick=()=>{started=true;render()};
+ h.append(b);app.append(h);
+}
+function go(i){S.i=i;save();render()}
+
+function render(){
+ const app=document.getElementById("app");app.replaceChildren();
+ if(!started){start(app);return}
+ app.append(brand());
+ if(S.i>=Q.length){result(app);return}
+ const q=view(S.i),ans=S.a[S.i],done=ans!=null;
+ const top=el("div","top");top.append(el("span","sec",q[0]),el("span","",(S.i+1)+" / "+Q.length));
+ const bar=el("div","bar"),f=el("i");f.style.width=(nAns()/Q.length*100)+"%";bar.append(f);
+ const card=el("div","card cat"),qt=el("p","q",q[1]);qt.dir="auto";card.style.backgroundImage=CAT;card.append(qt);
+ q[2].forEach((o,j)=>{
+  const b=el("button","opt");b.disabled=done;b.dir="auto";
+  b.append(el("b","",L[j]),el("span","",o));
+  if(done){if(j===q[3])b.classList.add("ok");else if(j===ans)b.classList.add("no")}
+  b.onclick=()=>{S.a[S.i]=j;save();render()};
+  card.append(b);
+ });
+ if(done){
+  const ok=ans===q[3],ex=el("div","ex "+(ok?"ok":"no"));ex.dir="auto";
+  ex.append(el("strong","",ok?"✔ صح":"✘ غلط — الصح هو "+L[q[3]]+") "+q[2][q[3]]),el("span","",q[4]));
+  card.append(ex);
+ }
+ const nav=el("div","nav");
+ const pv=el("button","btn g","Previous");pv.disabled=S.i===0;pv.onclick=()=>go(S.i-1);
+ const nx=el("button","btn",S.i===Q.length-1?"Finish":"Next");nx.disabled=!done;nx.onclick=()=>go(S.i+1);
+ nav.append(pv,nx);
+ app.append(top,bar,card,nav);
+ window.scrollTo(0,0);
+}
+
+function result(app){
+ const card=el("div","card"),n=Q.length,s=score();
+ card.append(el("div","sec","النتيجة"),el("div","score",s+" / "+n));
+ const wrong=Q.map((q,i)=>i).filter(i=>S.a[i]!==view(i)[3]);
+ if(wrong.length){
+  card.append(el("p","","اضغط على السؤال اللي غلطت فيه تراجعه:"));
+  const c=el("div","chips");
+  wrong.forEach(i=>{const b=el("button","chip",String(i+1));b.onclick=()=>go(i);c.append(b)});
+  card.append(c);
+ }else card.append(el("p","","كل الإجابات صح."));
+ const r=el("button","btn","ابدأ من الأول");
+ r.onclick=()=>{if(confirm("تصفّر الإجابات وتبدأ من الأول؟")){S={i:0,a:{}};started=false;save();render()}};
+ const p=el("button","btn g","رجوع لآخر سؤال");p.onclick=()=>go(Q.length-1);
+ const nav=el("div","nav");nav.append(p,r);
+ app.append(card,nav);
+}
+if(S.i>Q.length)S.i=0;
+render();
+</script>
+</body>
+</html>
